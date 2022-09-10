@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('end_at')->nullable();
             $table->integer('kilometers');
             $table->string('status');
+            $table->string('payment_link')->nullable();
             $table->timestamps();
         });
     }

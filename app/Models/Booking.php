@@ -10,6 +10,10 @@ class Booking extends Model
 {
     use HasFactory;
 
+    protected $with = [
+        'vehicle'
+    ];
+
     protected $hidden = [
         'vehicle_id',
         'user_id'
@@ -18,5 +22,15 @@ class Booking extends Model
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class, 'vehicle_id');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function scopeBooked($query)
+    {
+        return $query->where('status', 'booked');
     }
 }

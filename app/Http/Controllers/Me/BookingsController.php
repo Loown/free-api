@@ -11,6 +11,6 @@ class BookingsController extends Controller
 {
     public function __invoke()
     {
-        return Response::json(Auth::user()->bookings()->with(['vehicle'])->get());
+        return Response::json(Auth::user()->bookings()->booked()->with(['vehicle'])->get());
     }
 }
