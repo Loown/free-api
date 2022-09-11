@@ -10,6 +10,7 @@ use App\Http\Controllers\Booking;
 Route::prefix('auth')->group(function () {
     Route::post('/register', Auth\RegisterController::class);
     Route::post('/login', Auth\LoginController::class);
+    Route::post('/login/admin', Auth\AdminLoginController::class);
 });
 
 Route::prefix('me')->middleware(['auth:sanctum'])->group(function () {

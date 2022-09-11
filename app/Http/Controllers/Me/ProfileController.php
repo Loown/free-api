@@ -11,6 +11,7 @@ class ProfileController extends Controller
 {
     public function __invoke()
     {
+        Auth::user()->load(['roles']);
         return Response::json(Auth::user());
     }
 }
