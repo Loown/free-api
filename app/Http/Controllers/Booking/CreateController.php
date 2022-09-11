@@ -26,7 +26,7 @@ class CreateController extends Controller
         $booking->end_at = $end_at;
         $booking->status = 'processing';
         $booking->kilometers = $request->get('kilometers');
-        $booking->user()->associate(User::where('email', 'demo@demo.com')->first());
+        $booking->user()->associate(Auth::user());
         $booking->vehicle()->associate(Vehicle::where('id', request()->get('vehicle'))->first());
         $paymentIntent = $stripe->paymentIntents->create([
             'amount' => 2000,

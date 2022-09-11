@@ -30,6 +30,6 @@ Route::prefix('vehicles')->group(function () {
 Route::prefix('bookings')->group(function () {
     Route::get('/', Booking\ListController::class);
     Route::get('/{booking:id}', Booking\OneController::class);
-    Route::post('/', Booking\CreateController::class);
-    Route::post('/{booking:id}/complete', Booking\CompleteController::class);
+    Route::post('/', Booking\CreateController::class)->middleware(['auth:sanctum']);
+    Route::post('/{booking:id}/complete', Booking\CompleteController::class)->middleware(['auth:sanctum']);
 });
