@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 
 class RegisterController extends Controller
 {
@@ -16,16 +17,15 @@ class RegisterController extends Controller
         $user = new User();
         $user->email = $request->get('email');
         $user->password = Hash::make($request->get('password'));
-        $user->nanoid = nanoid();
         $user->save();
 
         if (Auth::attempt($request->only(['email', 'password']))) {
-            return $this->success([
+            return Response::json([
                 'token' => Auth::user()->createToken('free-4-motion')->plainTextToken,
                 'user' => Auth::user(),
             ]);
         }
 
-        return $this->error('Une erreur a eu lieu avec la création du compte.');
+        return Response::json('Une erreur a eu lieu avec la création du compte.', 400);
     }
 }
